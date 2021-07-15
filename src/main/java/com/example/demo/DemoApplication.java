@@ -44,7 +44,7 @@ public class DemoApplication {
         startPolling(signatureRequestResponse);
 	}
 
-	@GetMapping("/hello")
+	@PostMapping("/hello")
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		System.out.println("hello");
 		return String.format("Hello %s!", name);
