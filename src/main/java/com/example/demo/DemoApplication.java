@@ -56,7 +56,7 @@ public class DemoApplication {
 		return String.format("Hello %s!", name);
 	}
 
-	@GetMapping("/download/{documentId}")
+	@PostMapping("/download/{documentId}")
     public void hello2(@PathVariable String documentId) throws IOException {
         logger.info(documentId);
         //System.out.println("hello");
@@ -123,7 +123,7 @@ public class DemoApplication {
         System.out.println(signatureRequestResponse.getDocument_id());
         return signatureRequestResponse;
     }
-
+//invulnerable-vin-64865
     public static void startPolling(SignatureRequestResponse signatureRequestResponse){
         //Start polling SR Get, every 10 seconds
         Timer timer = new Timer();
