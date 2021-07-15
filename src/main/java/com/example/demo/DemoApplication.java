@@ -56,7 +56,7 @@ public class DemoApplication {
 		return String.format("Hello %s!", name);
 	}
 
-	@GetMapping("/download/{documentId}")
+	@PostMapping("/download/{documentId}")
     public void hello2(@PathVariable String documentId) throws IOException {
         logger.info(documentId);
         //System.out.println("hello");
