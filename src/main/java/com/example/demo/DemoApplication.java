@@ -41,10 +41,10 @@ public class DemoApplication {
         System.out.println("Please wait until your document is signed");
 
         //check if signed and download doc after signing
-        startPolling(signatureRequestResponse);
+        //startPolling(signatureRequestResponse);
 	}
 
-	@PostMapping("/hello")
+	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		System.out.println("hello");
 		return String.format("Hello %s!", name);
