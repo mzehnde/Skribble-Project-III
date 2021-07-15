@@ -16,24 +16,11 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 
-import javax.print.DocFlavor;
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+
+
+
 
 //create a request /download (heroku url --> deploy this to heroku) that will be sent as callbackURL,
 //request / download: has to cal skribble api to download doc to desktop (use download() function)
@@ -60,17 +47,13 @@ public class DemoApplication {
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		System.out.println("hello");
-
-
 		return String.format("Hello %s!", name);
 	}
 
 	@GetMapping("/download/{documentId}")
     public void hello2(@PathVariable String documentId) throws IOException {
         System.out.println("hello");
-
         downloadPDF(documentId);
-
     }
 
 
@@ -123,8 +106,8 @@ public class DemoApplication {
                 "\"message\": \"Please sign this document\"," +
                 "\"content\":\"" + content + "\"," +
                 "\"signatures\":[{\"signer_email_address\" : \"max.zehnder@uzh.ch\"}]," +
-                "\"callback_success_url\": \"https://google.com/SKRIBBLE_SIGNATURE_REQUEST_ID/success?document_id=SKRIBBLE_DOCUMENT_ID&token="+Token+"\"}";
-
+                "\"callback_success_url\": \"https://localhost:8080/hello/id\"}";
+//https://google.com/SKRIBBLE_SIGNATURE_REQUEST_ID/success?document_id=SKRIBBLE_DOCUMENT_ID&token="+Token+"
         //process SR Request call and retrieve Response
         String response2 = processRequest(connection2, jsonInputString2, "POST", Token);
 
