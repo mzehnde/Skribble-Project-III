@@ -45,7 +45,7 @@ public class DemoApplication {
         System.out.println("Please wait until your document is signed");
 
         //check if signed and download doc after signing
-        //startPolling(signatureRequestResponse);
+        startPolling(signatureRequestResponse);
 	}
 
 	@PostMapping("/hello")
@@ -56,7 +56,7 @@ public class DemoApplication {
 		return String.format("Hello %s!", name);
 	}
 
-	@PostMapping("/download/{documentId}")
+	@GetMapping("/download/{documentId}")
     public void hello2(@PathVariable String documentId) throws IOException {
         logger.info(documentId);
         //System.out.println("hello");
