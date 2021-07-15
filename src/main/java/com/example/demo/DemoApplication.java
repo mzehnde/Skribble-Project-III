@@ -106,7 +106,7 @@ public class DemoApplication {
                 "\"message\": \"Please sign this document\"," +
                 "\"content\":\"" + content + "\"," +
                 "\"signatures\":[{\"signer_email_address\" : \"max.zehnder@uzh.ch\"}]," +
-                "\"callback_success_url\": \"https://localhost:8080/hello/id\"}";
+                "\"callback_success_url\": \"https://invulnerable-vin-64865.herokuapp.com/hello\"}";
 //https://google.com/SKRIBBLE_SIGNATURE_REQUEST_ID/success?document_id=SKRIBBLE_DOCUMENT_ID&token="+Token+"
         //process SR Request call and retrieve Response
         String response2 = processRequest(connection2, jsonInputString2, "POST", Token);

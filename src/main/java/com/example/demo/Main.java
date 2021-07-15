@@ -94,8 +94,8 @@ public class Main {
         String jsonInputString2 = "{\"title\": \"Example Contract XX\"," +
                 "\"message\": \"Please sign this document\"," +
                 "\"content\":\"" + content + "\"," +
-                "\"signatures\":[{\"signer_email_address\" : \"max.zehnder@uzh.ch\"}]," +
-                "\"callback_success_url\": \"https://google.com/SKRIBBLE_SIGNATURE_REQUEST_ID/success?document_id=SKRIBBLE_DOCUMENT_ID&token="+Token+"\"}";
+                "\"signatures\":[{\"signer_email_address\" : \"max.zehnder@uzh.ch\"}]";// +
+                //"\"callback_success_url\": \"https://google.com/SKRIBBLE_SIGNATURE_REQUEST_ID/success?document_id=SKRIBBLE_DOCUMENT_ID&token="+Token+"\"}";
 
         //process SR Request call and retrieve Response
         String response2 = processRequest(connection2, jsonInputString2, "POST", Token);
