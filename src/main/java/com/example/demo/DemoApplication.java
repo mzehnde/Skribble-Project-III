@@ -52,13 +52,14 @@ public class DemoApplication {
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		//System.out.println("hello");
         logger.info("skr");
+
 		return String.format("Hello %s!", name);
 	}
 
 	@GetMapping("/download/{documentId}")
     public void hello2(@PathVariable String documentId) throws IOException {
-
-        System.out.println("hello");
+        logger.info(documentId);
+        //System.out.println("hello");
         downloadPDF(documentId);
     }
 
@@ -112,13 +113,14 @@ public class DemoApplication {
                 "\"message\": \"Please sign this document\"," +
                 "\"content\":\"" + content + "\"," +
                 "\"signatures\":[{\"signer_email_address\" : \"max.zehnder@uzh.ch\"}]," +
-                "\"callback_success_url\": \"https://invulnerable-vin-64865.herokuapp.com/hello\"}";
+                "\"callback_success_url\": \"https://invulnerable-vin-64865.herokuapp.com/download/SKRIBBLE_DOCUMENT_ID\"}";
 //https://invulnerable-vin-64865.herokuapp.com/hello"
         //process SR Request call and retrieve Response
         String response2 = processRequest(connection2, jsonInputString2, "POST", Token);
 
         //convert Json Response to Entity and return (for polling)
         SignatureRequestResponse signatureRequestResponse = convertJsonToEntity(response2);
+        System.out.println(signatureRequestResponse.getDocument_id());
         return signatureRequestResponse;
     }
 
