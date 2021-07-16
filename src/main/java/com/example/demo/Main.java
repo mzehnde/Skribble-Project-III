@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 
+/*
 import javax.print.DocFlavor;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -78,10 +79,12 @@ public class Main {
         System.out.println("Enter the path of your File to be signed:");
         String filePath = filePathInput.nextLine();
 
-        /*Scanner signerInput = new Scanner(System.in);
+        */
+/*Scanner signerInput = new Scanner(System.in);
         System.out.println("Enter the Email of your signer:");
         String signerEmail = signerInput.nextLine();
-        Email signer_email = new Email(signerEmail);*/
+        Email signer_email = new Email(signerEmail);*//*
+
 
 
 
@@ -257,3 +260,4 @@ public class Main {
         return gson.fromJson(json, SignatureRequestResponse.class);
     }
 }
+*/

@@ -30,7 +30,7 @@ import java.util.TimerTask;
 @RestController
 public class DemoApplication {
 
-    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    private static Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 
     private static StringBuilder Token;
 
@@ -45,7 +45,7 @@ public class DemoApplication {
         System.out.println("Please wait until your document is signed");
 
         //check if signed and download doc after signing
-        startPolling(signatureRequestResponse);
+        //startPolling(signatureRequestResponse);
 	}
 
 	@PostMapping("/hello")
@@ -120,7 +120,7 @@ public class DemoApplication {
 
         //convert Json Response to Entity and return (for polling)
         SignatureRequestResponse signatureRequestResponse = convertJsonToEntity(response2);
-        System.out.println(signatureRequestResponse.getDocument_id());
+        //System.out.println(signatureRequestResponse.getDocument_id());
         return signatureRequestResponse;
     }
 //invulnerable-vin-64865
@@ -197,14 +197,15 @@ public class DemoApplication {
 
         try {
             InputStream inputStream = connection4.getInputStream();
-            FileOutputStream outputStream = new FileOutputStream("/Users/maxzehnder/Desktop/Skribble/Signed3.pdf");
+            System.out.println("skr");
+            /*FileOutputStream outputStream = new FileOutputStream("/Users/maxzehnder/Desktop/Skribble/Signed3.pdf");
 
             int bytesRead = -1;
             byte[] buffer = new byte[1024];
             while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
+                outputStream.write(buffer, 0, bytesRead);*/
             }
-        } catch (Exception e){
+        /*}*/ catch (Exception e){
             System.out.println("Couldn't access Input Stream");
         }
 
