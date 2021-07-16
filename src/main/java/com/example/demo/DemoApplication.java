@@ -197,7 +197,7 @@ public class DemoApplication {
 
         try {
             InputStream inputStream = connection4.getInputStream();
-            System.out.println("skr");
+            System.out.println("skr1");
             /*FileOutputStream outputStream = new FileOutputStream("/Users/maxzehnder/Desktop/Skribble/Signed3.pdf");
 
             int bytesRead = -1;
