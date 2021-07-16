@@ -202,10 +202,10 @@ public class DemoApplication {
             FileOutputStream outputStream = new FileOutputStream("/app/tmp");
 
 
-           /* int bytesRead = -1;
+            int bytesRead = -1;
             byte[] buffer = new byte[1024];
             while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);}*/
+                outputStream.write(buffer, 0, bytesRead);}
 
             /*FileOutputStream outputStream = new FileOutputStream("/Users/maxzehnder/Desktop/Skribble/Signed3.pdf");
 
