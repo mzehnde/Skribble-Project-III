@@ -199,7 +199,7 @@ public class DemoApplication {
         try {
             InputStream inputStream = connection4.getInputStream();
 
-            FileOutputStream outputStream = new FileOutputStream("/app/tmp/test.pdf");
+            FileOutputStream outputStream = new FileOutputStream("/app/tmp");
 
 
             int bytesRead = -1;
