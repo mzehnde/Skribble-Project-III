@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import com.example.demo.Documents.DocumentToSign;
+import com.example.demo.Request;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -11,16 +14,12 @@ public class User {
     private String username;
     private String api_key;
     private static StringBuilder Token;
-    private DocumentToSign DocumentToSign;
+    private com.example.demo.Documents.DocumentToSign DocumentToSign;
 
-    public DocumentToSign getDocument() {
+
+    public DocumentToSign getDocumentToSign() {
         return DocumentToSign;
     }
-
-    public void setDocument(DocumentToSign base64DocumentToSign) {
-        this.DocumentToSign = base64DocumentToSign;
-    }
-
 
     public String getUsername() {
         return username;
@@ -35,6 +34,9 @@ public class User {
     }
 
 
+    public void setDocumentToSign(DocumentToSign base64DocumentToSign) {
+        this.DocumentToSign = base64DocumentToSign;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -48,36 +50,38 @@ public class User {
         Token = token;
     }
 
-    public User(String username, String api_key){
+
+    public User(String username, String api_key) {
         this.username = username;
         this.api_key = api_key;
     }
 
 
-
-
     public void loginUser() throws IOException {
+
         // build a connection to the API call
-        URL url1 = new URL("https://api.scribital.com/v1/access/login");
-        HttpURLConnection connection1 = (HttpURLConnection) url1.openConnection();
+        URL url = new URL("https://api.scribital.com/v1/access/login");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         //Create JSonInput for Login Request
-        //String jsonInputString1 = "{\"username\": \"api_demo_maxag_dd58_0\", \"api-key\":\"8cecd429-3749-4e2a-9bf4-7d520e3196b0\"}";
-        String jsonInputString1 = "{\"username\": \""+this.getUsername()+"\", \"api-key\":\""+this.getApi_key()+"\"}";
-        System.out.println(jsonInputString1);
+        String jsonInputString1 = "{\"username\": \"" + this.getUsername() + "\", \"api-key\":\"" + this.getApi_key() + "\"}";
 
-        Request request = new Request("POST", jsonInputString1, connection1, null);
         //Process the request and get response of request
-        String response1 = request.processRequest(connection1, jsonInputString1, "POST", null, false);
+        Request request = new Request("POST", jsonInputString1, connection, null);
+        String token = request.processRequest(false);
 
         //save response as our token
+        saveToken(token);
+
+        //disconnect
+        connection.disconnect();
+    }
+
+
+    public void saveToken(String token) {
         StringBuilder responseData = new StringBuilder();
-        responseData.append(response1);
+        responseData.append(token);
         Token = responseData;
-
-        //Print and disconnectx
-
-        connection1.disconnect();
     }
 
 }

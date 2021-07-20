@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Documents;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,6 @@ public class DocumentToSign {
     private String base64Content;
 
 
-
     public String getFilePath() {
         return filePath;
     }
@@ -18,7 +17,6 @@ public class DocumentToSign {
     public String getBase64Content() {
         return base64Content;
     }
-
 
 
     public void setFilePath(String filePath) {
@@ -36,8 +34,6 @@ public class DocumentToSign {
         byte[] bytes = Files.readAllBytes(file.toPath());
         this.base64Content = Base64.getEncoder().encodeToString(bytes);
     }
-
-
 
 
 }

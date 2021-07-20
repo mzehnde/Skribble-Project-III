@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.JsonEntities;
 
 
 import java.util.List;
@@ -23,8 +23,8 @@ public class SignatureRequestResponse {
 
 
     public SignatureRequestResponse(String id, String title, String message, String document_id, String legislation,
-                    String quality, String signing_url, String status_overall, List<Signer> signatures, List<String> cc_email_addresses,
-                    String owner, List<String> read_access, List<String> write_access, String created_at, String updated_at){
+                                    String quality, String signing_url, String status_overall, List<Signer> signatures, List<String> cc_email_addresses,
+                                    String owner, List<String> read_access, List<String> write_access, String created_at, String updated_at) {
         this.id = id;
         this.title = title;
         this.message = message;
@@ -41,54 +41,66 @@ public class SignatureRequestResponse {
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
+
     public String getId() {
         return id;
     }
+
     public String getTitle() {
         return title;
     }
+
     public String getMessage() {
         return message;
     }
+
     public String getDocument_id() {
         return document_id;
     }
+
     public String getLegislation() {
         return legislation;
     }
+
     public String getQuality() {
         return quality;
     }
+
     public String getSigning_url() {
         return signing_url;
     }
+
     public String getStatus_overall() {
         return status_overall;
     }
+
     public List<Signer> getSignatures() {
         return signatures;
     }
+
     public List<String> getCc_email_addresses() {
         return cc_email_addresses;
     }
+
     public String getOwner() {
         return owner;
     }
+
     public List<String> getRead_access() {
         return read_access;
     }
+
     public List<String> getWrite_access() {
         return write_access;
     }
+
     public String getCreated_at() {
         return created_at;
     }
+
     public String getUpdated_at() {
         return updated_at;
     }
-
-
-
 
 
 }

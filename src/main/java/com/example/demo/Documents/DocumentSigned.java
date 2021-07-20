@@ -1,4 +1,7 @@
-package com.example.demo;
+package com.example.demo.Documents;
+
+import com.example.demo.Request;
+import com.example.demo.User;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,6 +10,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class DocumentSigned {
+    private String signedDocumentId;
+
+
+    public DocumentSigned(String signedDocumentId) {
+        this.signedDocumentId = signedDocumentId;
+    }
+
+
     public String getSignedDocumentId() {
         return signedDocumentId;
     }
@@ -15,27 +26,18 @@ public class DocumentSigned {
         this.signedDocumentId = signedDocumentId;
     }
 
-    public DocumentSigned(String signedDocumentId) {
-        this.signedDocumentId = signedDocumentId;
-    }
 
-    private String signedDocumentId;
-
-
-    public void downloadPDF(String signatureRequestResponseId) throws IOException {
+    public void downloadPDF() throws IOException {
 
         //GET REQUEST TO RETRIEVE PDF
-        URL url4 = new URL("https://api.scribital.com/v1/documents/" + signatureRequestResponseId + "/content");
-        HttpURLConnection connection4 = (HttpURLConnection) url4.openConnection();
+        URL url = new URL("https://api.scribital.com/v1/documents/" + signedDocumentId + "/content");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-        Request request = new Request("GET", null, connection4, User.getToken());
-        request.processRequest(connection4, null, "GET", User.getToken(), true);
-
-        //setRequestProperties(connection4, "GET", Token);
+        Request request = new Request("GET", null, connection, User.getToken());
+        request.processRequest(true);
 
         try {
             InputStream inputStream = request.getConnection().getInputStream();
-            //InputStream inputStream = connection4.getInputStream();
 
             FileOutputStream outputStream = new FileOutputStream("/Users/maxzehnder/Desktop/Skribble/TestFiles/signed.pdf");
 
@@ -47,8 +49,7 @@ public class DocumentSigned {
             }
 
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Couldn't access Input Stream");
         }
 
