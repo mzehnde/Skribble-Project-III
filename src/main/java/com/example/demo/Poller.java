@@ -49,6 +49,7 @@ public class Poller {
 
                         DocumentSigned documentSigned = new DocumentSigned(signatureRequestResponse.getDocument_id());
                         documentSigned.downloadPDF();
+                        System.out.println("Your Document was signed and downloaded");
 
                     } catch (IOException e) {
 
