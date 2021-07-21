@@ -131,13 +131,13 @@ public class DemoApplication {
     private static void writeIdtoFile(ArrayList<SignatureRequestResponse> responseList) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("/Users/maxzehnder/Desktop/Skribble/TestFiles/SignatureRequestIds");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        byteArrayOutputStream.write(String.format("%s\t \t \t %s", "Email", "ID").getBytes());
-        //byteArrayOutputStream.write("E-Mail of Signer  Signature-Request-ID".getBytes());
+        byteArrayOutputStream.write(String.format("%s\t \t \t \t \t %s", "E-Mail", "Signature-Request-ID").getBytes());
+        byteArrayOutputStream.write("\r\n".getBytes());
         byteArrayOutputStream.write("\r\n".getBytes());
 
         for (int i = 0 ; i < responseList.size(); i++){
 
-            byteArrayOutputStream.write(String.format("%s\t %s", responseList.get(i).getSignatures().get(0).getSigner_email_address(), (responseList.get(i).getId())).getBytes());
+            byteArrayOutputStream.write(String.format("%s\t \t \t %s", responseList.get(i).getSignatures().get(0).getSigner_email_address(), (responseList.get(i).getId())).getBytes());
 
             /*byteArrayOutputStream.write(responseList.get(i).getSignatures().get(0).getSigner_email_address().getBytes());
             byteArrayOutputStream.write("  ".getBytes());
