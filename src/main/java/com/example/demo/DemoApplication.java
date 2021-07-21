@@ -5,7 +5,6 @@ import com.example.demo.JsonEntities.SignatureRequestResponse;
 import com.example.demo.UseCase2.Signer;
 import com.google.gson.Gson;
 import com.opencsv.CSVReader;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -13,10 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
@@ -85,6 +83,7 @@ public class DemoApplication {
             }
             //signerList.add(new Signer(parts[0], parts[1]));
         }
+        doRequests(signerList);
         System.out.print(signerList.get(0).getE_mail());
 
     }
@@ -102,13 +101,61 @@ public class DemoApplication {
         return null;
     }
 
+    //iterate sigenr list and create sr post request
+    private static void doRequests(ArrayList<Signer> signerList) throws IOException {
+        ArrayList<SignatureRequestResponse> responseList = new ArrayList<>();
+        for (int i = 0 ; i < signerList.size() ; i++){
+            URL url = new URL("https://api.scribital.com/v1/signature-requests");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            String jsonInputString = "{\"title\": \"Example Contract X\"," +
+                    "\"message\": \"Please sign this document\"," +
+                    "\"content\":\"" + signerList.get(i).getDocumentToSign().getBase64Content() + "\"," +
+                    "\"signatures\":[{\"signer_email_address\" : \"" + signerList.get(i).getE_mail()+ "\"}]," +
+                    "\"callback_success_url\": \"https://invulnerable-vin-64865.herokuapp.com/download/SKRIBBLE_DOCUMENT_ID\"}";
+
+            Request request = new Request("POST", jsonInputString, connection, User.getToken());
+            String response = request.processRequest(false);
+            SignatureRequestResponse signatureRequestResponse = convertJsonToEntity(response);
+            responseList.add(signatureRequestResponse);
+
+
+        }
+        writeIdtoFile(responseList);
+        System.out.println(responseList.get(0).getId());
+        System.out.println(responseList.get(1).getId());
+    }
+
+
+    //add value of list in list to array and write to file
+    private static void writeIdtoFile(ArrayList<SignatureRequestResponse> responseList) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream("/Users/maxzehnder/Desktop/Skribble/TestFiles/SignatureRequestIds");
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byteArrayOutputStream.write(String.format("%s\t \t \t %s", "Email", "ID").getBytes());
+        //byteArrayOutputStream.write("E-Mail of Signer  Signature-Request-ID".getBytes());
+        byteArrayOutputStream.write("\r\n".getBytes());
+
+        for (int i = 0 ; i < responseList.size(); i++){
+
+            byteArrayOutputStream.write(String.format("%s\t %s", responseList.get(i).getSignatures().get(0).getSigner_email_address(), (responseList.get(i).getId())).getBytes());
+
+            /*byteArrayOutputStream.write(responseList.get(i).getSignatures().get(0).getSigner_email_address().getBytes());
+            byteArrayOutputStream.write("  ".getBytes());
+            byteArrayOutputStream.write(responseList.get(i).getId().getBytes());*/
+            if ( i != responseList.size()-1){
+                byteArrayOutputStream.write("\r\n".getBytes());
+            }
+        }
+        byte[] idToBytes = byteArrayOutputStream.toByteArray();
+        fileOutputStream.write(idToBytes);
+    }
 
 
 
 
     
 
-
+//String.format("%s\t%s", query, value);
 
 
 
