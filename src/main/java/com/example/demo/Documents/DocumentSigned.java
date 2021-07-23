@@ -37,6 +37,11 @@ public class DocumentSigned {
         Request request = new Request("GET", null, connection, User.getToken());
         request.processRequest(true);
 
+        getResponseData(request);
+    }
+
+
+    private void getResponseData(Request request){
         try {
             InputStream inputStream = request.getConnection().getInputStream();
 
@@ -53,7 +58,6 @@ public class DocumentSigned {
         } catch (Exception e) {
             System.out.println("Couldn't access Input Stream");
         }
-
     }
 
 }

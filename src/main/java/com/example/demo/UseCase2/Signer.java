@@ -17,12 +17,13 @@ public class Signer {
         return documentToSign;
     }
 
-    public void setDocumentToSign(DocumentToSign documentToSign) {
-        this.documentToSign = documentToSign;
-    }
-
     public String getE_mail() {
         return e_mail;
+    }
+
+
+    public void setDocumentToSign(DocumentToSign documentToSign) {
+        this.documentToSign = documentToSign;
     }
 
     public void setE_mail(String e_mail) {

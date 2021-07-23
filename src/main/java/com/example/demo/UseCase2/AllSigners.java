@@ -22,7 +22,7 @@ public class AllSigners {
         this.signerList = signerList;
     }
 
-
+    //convert the csvFile-List to a list with Signer Entities (with E-Mail and DocumentToSign Entity)
     public void populateSignerList(CSVFile csvFile) throws IOException {
         ArrayList<Signer> signerList = new ArrayList<>();
         List<String> csvFileList = csvFile.getCSVFileList();

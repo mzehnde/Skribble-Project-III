@@ -35,6 +35,7 @@ public class CSVFile {
     }
 
 
+    //read the CSV File and create a list with signer emails and their files to be signed
     public void readCSVFile() throws FileNotFoundException {
         List<List<String>> records = new ArrayList<>();
         List<String> csvFileList = new ArrayList<>();

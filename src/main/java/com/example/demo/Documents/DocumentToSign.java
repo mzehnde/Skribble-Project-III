@@ -11,6 +11,24 @@ public class DocumentToSign {
     private String base64Content;
 
 
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public String getBase64Content() {
+        return base64Content;
+    }
+
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void setBase64Content(String base64Content) {
+        this.base64Content = base64Content;
+    }
+
+
     public DocumentToSign(String filePath) throws IOException {
         this.filePath = filePath;
 
@@ -29,21 +47,7 @@ public class DocumentToSign {
         return null;
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public String getBase64Content() {
-        return base64Content;
-    }
-
-    public void setBase64Content(String base64Content) {
-        this.base64Content = base64Content;
-    }
 
 
 }

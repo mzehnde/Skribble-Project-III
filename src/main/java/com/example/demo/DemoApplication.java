@@ -32,19 +32,19 @@ public class DemoApplication {
         user.loginUser();
         System.out.println("You have been successfully logged in");
 
-        //2. read the csv file
+        //2. read the csv file and create a list with signer documents and E-Mails
         CSVFile csvFile = new CSVFile("/Users/maxzehnder/Desktop/Skribble/TestFiles/TestCSVFile.csv");
         csvFile.readCSVFile();
 
-        //3. populate signerlist with signers of csv file
+        //3. populate signerlist with signers of csv file as Signer Entities
         AllSigners allSigners = new AllSigners();
         allSigners.populateSignerList(csvFile);
 
-        //4. process the requests and get responselist
+        //4. process the requests and get response-list of all the requests
         AllSignatureRequests allSignatureRequests = new AllSignatureRequests(allSigners.getSignerList());
         allSignatureRequests.doRequests();
 
-        //5. write SR Id's to file
+        //5. write SR Id's to file with corresponding E-Mail
         SignatureRequestIdFile signatureRequestIdFile = new SignatureRequestIdFile(allSignatureRequests.getResponseList(), "/Users/maxzehnder/Desktop/Skribble/TestFiles/SignatureRequestIds");
         signatureRequestIdFile.writeIdToFile();
 
