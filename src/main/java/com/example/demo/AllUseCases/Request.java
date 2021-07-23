@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.AllUseCases;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,21 +25,20 @@ public class Request {
         return requestType;
     }
 
-    public String getJsonInputString() {
-        return JsonInputString;
-    }
-
-    public HttpURLConnection getConnection() {
-        return connection;
-    }
-
-
     public void setRequestType(String requestType) {
         this.requestType = requestType;
     }
 
+    public String getJsonInputString() {
+        return JsonInputString;
+    }
+
     public void setJsonInputString(String jsonInputString) {
         JsonInputString = jsonInputString;
+    }
+
+    public HttpURLConnection getConnection() {
+        return connection;
     }
 
     public void setConnection(HttpURLConnection connection) {
@@ -54,10 +53,10 @@ public class Request {
         if (requestType == "POST") {
             setOutputStream();
         }
-
         if (pdf) {
             return null;
-        } else {
+        }
+        else {
             return getRequestResponse();
         }
     }
@@ -83,7 +82,6 @@ public class Request {
             os.write(input, 0, input.length);
             os.close();
         }
-
     }
 
     public String getRequestResponse() throws IOException {
@@ -99,6 +97,5 @@ public class Request {
         }
         return responseData;
     }
-
 
 }

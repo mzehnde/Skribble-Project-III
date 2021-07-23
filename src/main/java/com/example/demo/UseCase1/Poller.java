@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.UseCase1;
 
+import com.example.demo.AllUseCases.Request;
+import com.example.demo.AllUseCases.User;
 import com.example.demo.Documents.DocumentSigned;
 import com.example.demo.JsonEntities.SignatureRequestResponse;
 
@@ -17,20 +19,17 @@ public class Poller {
     private SignatureRequestResponse signatureRequestResponse;
 
 
-    public SignatureRequestResponse getSignatureRequestResponse() {
-        return signatureRequestResponse;
-    }
-
-
-    public void setSignatureRequestResponse(SignatureRequestResponse signatureRequestResponse) {
-        this.signatureRequestResponse = signatureRequestResponse;
-    }
-
-
     public Poller(SignatureRequestResponse signatureRequestResponse) {
         this.signatureRequestResponse = signatureRequestResponse;
     }
 
+    public SignatureRequestResponse getSignatureRequestResponse() {
+        return signatureRequestResponse;
+    }
+
+    public void setSignatureRequestResponse(SignatureRequestResponse signatureRequestResponse) {
+        this.signatureRequestResponse = signatureRequestResponse;
+    }
 
     public void startPolling(SignatureRequestResponse signatureRequestResponse) {
         //Start polling SR Get, every 10 seconds

@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.UseCase1;
 
+import com.example.demo.AllUseCases.Request;
+import com.example.demo.AllUseCases.User;
 import com.example.demo.Documents.DocumentToSign;
 import com.example.demo.JsonEntities.SignatureRequestResponse;
 
@@ -16,7 +18,7 @@ public class SignatureRequest {
 
 
     public SignatureRequest(User user) {
-        this.user = user;
+        SignatureRequest.user = user;
     }
 
 
@@ -25,7 +27,7 @@ public class SignatureRequest {
     }
 
     public void setUser(User user) {
-        this.user = user;
+        SignatureRequest.user = user;
     }
 
 
@@ -46,7 +48,7 @@ public class SignatureRequest {
                 "\"callback_success_url\": \"https://invulnerable-vin-64865.herokuapp.com/download/SKRIBBLE_DOCUMENT_ID\"}";
 
         //process SR Request call and retrieve Response
-        Request request = new Request("POST", jsonInputString2, connection, user.getToken());
+        Request request = new Request("POST", jsonInputString2, connection, User.getToken());
         String response = request.processRequest(false);
 
         //convert Json Response to Entity and return (for polling)

@@ -1,7 +1,7 @@
 package com.example.demo.Documents;
 
-import com.example.demo.Request;
-import com.example.demo.User;
+import com.example.demo.AllUseCases.Request;
+import com.example.demo.AllUseCases.User;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class DocumentSigned {
+
     private String signedDocumentId;
 
 
