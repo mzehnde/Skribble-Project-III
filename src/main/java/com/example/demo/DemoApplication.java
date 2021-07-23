@@ -16,6 +16,12 @@ import java.util.Scanner;
 
 public class DemoApplication {
 
+    //@Todo: write arguments in args
+    //@Todo: format of classes (static beginning, constructor beginning)
+    //@Todo: dont do set(sth) when class isn't used later instead return it
+    //@Todo: open connection stuff in request class if possible
+    //@Todo: dS:Store in .gitignore aufnehmen
+
 
 
     public static void main(String[] args) throws IOException {
