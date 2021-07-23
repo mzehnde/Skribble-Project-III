@@ -54,7 +54,7 @@ public class SignatureRequestIdFile {
         fileOutputStream.write(idToBytes);
     }
 
-    public void handleFileFormat(ByteArrayOutputStream byteArrayOutputStream) throws IOException {
+    private void handleFileFormat(ByteArrayOutputStream byteArrayOutputStream) throws IOException {
         byteArrayOutputStream.write(String.format("%s\t \t \t \t \t %s", "E-Mail", "Signature-Request-ID").getBytes());
         byteArrayOutputStream.write("\r\n".getBytes());
         byteArrayOutputStream.write("\r\n".getBytes());

@@ -9,37 +9,20 @@ import com.example.demo.UseCase2.AllSigners;
 import com.example.demo.UseCase2.CSVFile;
 import com.example.demo.UseCase2.SignatureRequestIdFile;
 import com.google.gson.Gson;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.io.IOException;
 import java.util.Scanner;
 
 
-@SpringBootApplication
-@RestController
+
 public class DemoApplication {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 
 
     public static void main(String[] args) throws IOException {
-        SpringApplication.run(DemoApplication.class, args);
         //doUseCase1();
         doUseCase2();
-
-
     }
 
-
-    //Function to convert Json
-    public static SignatureRequestResponse convertJsonToEntity(String json) {
-        Gson gson = new Gson(); //
-        return gson.fromJson(json, SignatureRequestResponse.class);
-    }
 
 
     public static void doUseCase2() throws IOException {
@@ -93,6 +76,13 @@ public class DemoApplication {
         //check if signed and download doc after signing
         Poller poller = new Poller(signatureRequestResponse);
         poller.startPolling(signatureRequestResponse);
+    }
+
+
+    //Function to convert Json
+    public static SignatureRequestResponse convertJsonToEntity(String json) {
+        Gson gson = new Gson(); //
+        return gson.fromJson(json, SignatureRequestResponse.class);
     }
 }
 
