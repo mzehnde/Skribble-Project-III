@@ -9,15 +9,16 @@ import java.nio.charset.StandardCharsets;
 
 public class Request {
 
-
     private String requestType;
     private String JsonInputString;
     private HttpURLConnection connection;
+    private StringBuilder token;
 
-    public Request(String requestType, String jsonInputString, HttpURLConnection connection, StringBuilder Token) {
+    public Request(String requestType, String jsonInputString, HttpURLConnection connection, StringBuilder token) {
         this.requestType = requestType;
         this.JsonInputString = jsonInputString;
         this.connection = connection;
+        this.token = token;
     }
 
 
@@ -25,20 +26,20 @@ public class Request {
         return requestType;
     }
 
+    public String getJsonInputString() {
+        return JsonInputString;
+    }
+    public HttpURLConnection getConnection() {
+        return connection;
+    }
+
+
     public void setRequestType(String requestType) {
         this.requestType = requestType;
     }
 
-    public String getJsonInputString() {
-        return JsonInputString;
-    }
-
     public void setJsonInputString(String jsonInputString) {
         JsonInputString = jsonInputString;
-    }
-
-    public HttpURLConnection getConnection() {
-        return connection;
     }
 
     public void setConnection(HttpURLConnection connection) {
@@ -65,8 +66,8 @@ public class Request {
     //Helper Functions / setting Streams & Requests up
     public void setRequestProperties() throws IOException {
 
-        if (User.getToken() != null) {
-            connection.setRequestProperty("Authorization", "Bearer " + User.getToken().toString());
+        if (token != null) {
+            connection.setRequestProperty("Authorization", "Bearer " + token.toString());
         }
 
         connection.setRequestMethod(requestType);

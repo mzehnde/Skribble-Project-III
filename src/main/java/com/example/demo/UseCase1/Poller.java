@@ -17,10 +17,12 @@ import static com.example.demo.DemoApplication.convertJsonToEntity;
 public class Poller {
 
     private SignatureRequestResponse signatureRequestResponse;
+    private StringBuilder token;
 
 
-    public Poller(SignatureRequestResponse signatureRequestResponse) {
+    public Poller(SignatureRequestResponse signatureRequestResponse, StringBuilder token) {
         this.signatureRequestResponse = signatureRequestResponse;
+        this.token = token;
     }
 
     public SignatureRequestResponse getSignatureRequestResponse() {
@@ -46,7 +48,7 @@ public class Poller {
                 if (isSigned(signatureRequestResponse)) {
                     try {
 
-                        DocumentSigned documentSigned = new DocumentSigned(signatureRequestResponse.getDocument_id());
+                        DocumentSigned documentSigned = new DocumentSigned(signatureRequestResponse.getDocument_id(), token);
                         documentSigned.downloadPDF();
                         System.out.println("Your Document was signed and downloaded");
 
@@ -90,7 +92,7 @@ public class Poller {
     public SignatureRequestResponse getSignatureRequestResponse(HttpURLConnection connection) {
         String data = null;
         try {
-            Request request = new Request("GET", null, connection, User.getToken());
+            Request request = new Request("GET", null, connection, token);
             data = request.processRequest(false);
         } catch (IOException e) {
             e.printStackTrace();

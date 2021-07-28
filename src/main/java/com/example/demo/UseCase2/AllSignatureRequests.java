@@ -1,7 +1,6 @@
 package com.example.demo.UseCase2;
 
 import com.example.demo.AllUseCases.Request;
-import com.example.demo.AllUseCases.User;
 import com.example.demo.JsonEntities.SignatureRequestResponse;
 
 import java.io.IOException;
@@ -15,10 +14,12 @@ public class AllSignatureRequests {
 
     private ArrayList<SignatureRequestResponse> responseList;
     private ArrayList<Signer> signerList;
+    private StringBuilder token;
 
 
-    public AllSignatureRequests(ArrayList<Signer> signerList) {
+    public AllSignatureRequests(ArrayList<Signer> signerList, StringBuilder token) {
         this.signerList = signerList;
+        this.token = token;
     }
 
 
@@ -39,6 +40,7 @@ public class AllSignatureRequests {
         this.responseList = responseList;
     }
 
+
     //create SR for all files and signers in signer-list
     public void doRequests() throws IOException {
         ArrayList<SignatureRequestResponse> responseList = new ArrayList<>();
@@ -54,7 +56,7 @@ public class AllSignatureRequests {
                     "\"callback_success_url\": \"https://invulnerable-vin-64865.herokuapp.com/download/SKRIBBLE_DOCUMENT_ID\"}";
 
             //get the response of the request in Json and create response-list with entity (converted from json file)
-            Request request = new Request("POST", jsonInputString, connection, User.getToken());
+            Request request = new Request("POST", jsonInputString, connection, token);
             String response = request.processRequest(false);
             SignatureRequestResponse signatureRequestResponse = convertJsonToEntity(response);
             responseList.add(signatureRequestResponse);

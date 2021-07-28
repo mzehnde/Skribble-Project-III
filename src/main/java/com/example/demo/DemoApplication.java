@@ -17,40 +17,41 @@ import java.util.Scanner;
 public class DemoApplication {
 
     //@Todo: write arguments in args
-    //@Todo: format of classes (static beginning, constructor beginning)
+    //@Todo: format of classes (static beginning, constructor beginning) -->DONE
     //@Todo: dont do set(sth) when class isn't used later instead return it
     //@Todo: open connection stuff in request class if possible
-    //@Todo: dS:Store in .gitignore aufnehmen
+    //@Todo: dont make token as a static field but return it after login for use in later requests --> DONE
 
 
 
-    public static void main(String[] args) throws IOException {
+
+    public static void main(/*@org.jetbrains.annotations.NotNull*/ String[] args) throws IOException {
         //doUseCase1();
-        doUseCase2();
+        doUseCase2(new String[]{args[0]});
     }
 
 
 
-    public static void doUseCase2() throws IOException {
+    public static void doUseCase2(String args[]) throws IOException {
 
         //1. Login User
         User user = new User("api_demo_maxag_dd58_0", "8cecd429-3749-4e2a-9bf4-7d520e3196b0");
-        user.loginUser();
+        StringBuilder token = user.loginUser();
         System.out.println("You have been successfully logged in");
 
         //2. read the csv file and create a list with signer documents and E-Mails
-        CSVFile csvFile = new CSVFile("/Users/maxzehnder/Desktop/Skribble/TestFiles/TestCSVFile.csv");
+        CSVFile csvFile = new CSVFile(args[0]);
         csvFile.readCSVFile();
 
-        //3. populate signerlist with signers of csv file as Signer Entities
+        //3. populate signer-List with signers of csv file as Signer Entities
         AllSigners allSigners = new AllSigners();
         allSigners.populateSignerList(csvFile);
 
-        //4. process the requests and get response-list of all the requests
-        AllSignatureRequests allSignatureRequests = new AllSignatureRequests(allSigners.getSignerList());
+        //4. Process the requests and get response-list of all the requests
+        AllSignatureRequests allSignatureRequests = new AllSignatureRequests(allSigners.getSignerList(), token);
         allSignatureRequests.doRequests();
 
-        //5. write SR Id's to file with corresponding E-Mail
+        //5. Write SR Id's to file with corresponding E-Mail
         SignatureRequestIdFile signatureRequestIdFile = new SignatureRequestIdFile(allSignatureRequests.getResponseList(), "/Users/maxzehnder/Desktop/Skribble/TestFiles/SignatureRequestIds");
         signatureRequestIdFile.writeIdToFile();
 
@@ -63,7 +64,7 @@ public class DemoApplication {
 
     public static void doUseCase1() throws IOException {
         User user = new User("api_demo_maxag_dd58_0", "8cecd429-3749-4e2a-9bf4-7d520e3196b0");
-        user.loginUser();
+        StringBuilder token = user.loginUser();
         System.out.println("You have been successfully logged in");
 
 
@@ -74,13 +75,13 @@ public class DemoApplication {
 
 
         //CREATE SR POST REQUEST
-        SignatureRequest signatureRequest = new SignatureRequest(user);
+        SignatureRequest signatureRequest = new SignatureRequest(user, token);
         SignatureRequestResponse signatureRequestResponse = signatureRequest.createSR(filePath);
         System.out.println("Please wait until your document is signed");
 
 
         //check if signed and download doc after signing
-        Poller poller = new Poller(signatureRequestResponse);
+        Poller poller = new Poller(signatureRequestResponse, token);
         poller.startPolling(signatureRequestResponse);
     }
 

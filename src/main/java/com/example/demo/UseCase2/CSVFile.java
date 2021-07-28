@@ -14,20 +14,23 @@ public class CSVFile {
     private String filePath;
     private List<String> CSVFileList;
 
+
     public CSVFile(String filePath) {
         this.filePath = filePath;
     }
+
 
     public String getFilePath() {
         return filePath;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
     public List<String> getCSVFileList() {
         return CSVFileList;
+    }
+
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     public void setCSVFileList(List<String> CSVFile) {

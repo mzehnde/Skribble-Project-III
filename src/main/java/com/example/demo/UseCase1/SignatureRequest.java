@@ -14,11 +14,13 @@ import static com.example.demo.DemoApplication.convertJsonToEntity;
 
 public class SignatureRequest {
 
-    private static User user;
+    private User user;
+    private StringBuilder token;
 
 
-    public SignatureRequest(User user) {
-        SignatureRequest.user = user;
+    public SignatureRequest(User user, StringBuilder token) {
+        this.user = user;
+        this.token = token;
     }
 
 
@@ -27,7 +29,7 @@ public class SignatureRequest {
     }
 
     public void setUser(User user) {
-        SignatureRequest.user = user;
+        this.user = user;
     }
 
 
@@ -48,7 +50,7 @@ public class SignatureRequest {
                 "\"callback_success_url\": \"https://invulnerable-vin-64865.herokuapp.com/download/SKRIBBLE_DOCUMENT_ID\"}";
 
         //process SR Request call and retrieve Response
-        Request request = new Request("POST", jsonInputString2, connection, User.getToken());
+        Request request = new Request("POST", jsonInputString2, connection, token);
         String response = request.processRequest(false);
 
         //convert Json Response to Entity and return (for polling)
